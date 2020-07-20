@@ -49,7 +49,7 @@ def main(
 
             # generate directory name
             dir_name = ''.join(choice(ascii_letters) for i in range(randint(1, max_letter_count)))
-            dir_path = os.path.join(cur_dir, file_name)
+            dir_path = os.path.join(cur_dir, dir_name)
             if cur_depth + 1 < depth:
                 # add directory to dir_queue
                 dir_queue.append((dir_path, cur_depth+1))

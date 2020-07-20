@@ -6,7 +6,7 @@ import click
 
 
 @click.command()
-@click.option('-d', '--depth', default=1, help='depth of files and folders makind')
+@click.option('-d', '--depth', default=3, help='depth of files and folders makind')
 @click.option('--max-letter-count', default=10, help='max letters of files and directories names ')
 @click.option('--max-file-count', default=10, help='max number of files in ond directory')
 @click.option('--max-directory-count', default=10, help='max number of directories in one directory')
@@ -24,11 +24,11 @@ def main(
     dir_queue = []
 
     # add root direcotry as first directory to start creating files
-    dir_queue.append((root,0))
+    dir_queue.append((os.path.join(root),0))
 
     while(len(dir_queue)):
         cur_dir, cur_depth = dir_queue.pop()
-        cur_dir = os.path.join(cur_dir)
+        print(cur_dir, cur_depth)
 
         # create directory if it's not existed
         if not os.path.exists(cur_dir):
@@ -43,13 +43,16 @@ def main(
             if not os.path.exists(file_path):
                 with open(file_path, "w") as f:
                     f.write("You know the rules and so do I\n")
-            print(file_name)
-
-
+        
         # create directories
-        # add directory to dir_queue
+        for i in range(randint(1, max_directory_count)):
 
-        pass
+            # generate directory name
+            dir_name = ''.join(choice(ascii_letters) for i in range(randint(1, max_letter_count)))
+            dir_path = os.path.join(cur_dir, file_name)
+            if cur_depth + 1 < depth:
+                # add directory to dir_queue
+                dir_queue.append((dir_path, cur_depth+1))
 
 
 if __name__ == "__main__":

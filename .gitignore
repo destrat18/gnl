@@ -131,3 +131,6 @@ dmypy.json
 
 #pipenv
 Pipfile.lock
+
+tmp/
+temp/
